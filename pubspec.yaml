@@ -1,0 +1,24 @@
+name: emoji_scavenger_hunt
+description: A new Flutter application.
+version: 1.0.0+1
+environment:
+  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.2
+  camera: any
+  firebase_ml_vision: any
+  rxdart: any
+  quiver: any
+  simple_logger: any
+  bloc_provider: any
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter:
+  uses-material-design: true
+  fonts:
+  - family: Changa One
+    fonts:
+    - asset: assets/fonts/ChangaOne-Regular.ttf
