@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "617579637592",
+    "firebase_url": "https://emoji-scavenger-hunt-flutter.firebaseio.com",
+    "project_id": "emoji-scavenger-hunt-flutter",
+    "storage_bucket": "emoji-scavenger-hunt-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617579637592:android:1c76b388db6f3c8e",
+        "android_client_info": {
+          "package_name": "com.mono0926.emojihunt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617579637592-4moc8rj4s01s2l11o4aec9ga6kel5n2u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mono0926.emojihunt",
+            "certificate_hash": "baa300192028cdbede29358c6f726c66fe6d432f"
+          }
+        },
+        {
+          "client_id": "617579637592-3gg9cpgv0or8jnkubc59kseegam9hf1v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDATzpjViwyM83b4Xx0aZ_MNRhXqqd-FUc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617579637592-3gg9cpgv0or8jnkubc59kseegam9hf1v.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "617579637592-pdrf0gvraa62rg54090s94sj1tmehile.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mono0926.emojihunt"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

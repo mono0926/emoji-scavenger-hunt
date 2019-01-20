@@ -13,6 +13,8 @@ dependencies:
   quiver: any
   simple_logger: any
   bloc_provider: any
+  image: any
+  path_provider: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

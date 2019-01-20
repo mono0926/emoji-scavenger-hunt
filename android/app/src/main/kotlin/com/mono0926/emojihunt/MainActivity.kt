@@ -1,4 +1,4 @@
-package com.mono0926.emojiscavengerhunt
+package com.mono0926.emojihunt
 
 import android.os.Bundle
 

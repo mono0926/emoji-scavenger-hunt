@@ -1,4 +1,4 @@
-import 'package:emoji_scavenger_hunt/pages/capture_page.dart';
+import 'package:emoji_scavenger_hunt/pages/root_page.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -6,7 +6,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: _buildTheme(),
-      home: CapturePage(),
+      home: RootPage(),
+//      home: CapturePage(),
     );
   }
 
@@ -15,19 +16,28 @@ class App extends StatelessWidget {
     final fontFamily = 'Changa One';
     return base.copyWith(
       platform: TargetPlatform.android,
-      primaryColor: Color(0xFFEC3F41),
+      primaryColor: const Color(0xFFEC3F41),
+//      textSelectionColor: Colors.white,
       buttonTheme: base.buttonTheme.copyWith(
-        minWidth: 44,
-        padding: EdgeInsets.all(8),
-      ),
+//        minWidth: 44,
+//        padding: EdgeInsets.all(8),
+          ),
       primaryTextTheme: base.primaryTextTheme
           .copyWith(
-            title: TextStyle(fontSize: 32),
+            title: const TextStyle(fontSize: 32),
           )
           .apply(
             fontFamily: fontFamily,
           ),
-      textTheme: base.textTheme.apply(fontFamily: fontFamily),
+      textTheme: base.textTheme
+          .apply(
+            bodyColor: Colors.white,
+          )
+          .copyWith(
+            subhead: const TextStyle(
+              fontWeight: FontWeight.w200,
+            ),
+          ),
     );
   }
 }
