@@ -29,7 +29,7 @@ class App extends StatelessWidget {
           .apply(
             fontFamily: fontFamily,
           ),
-      textTheme: base.textTheme
+      accentTextTheme: base.accentTextTheme
           .apply(
             bodyColor: Colors.white,
           )

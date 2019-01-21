@@ -24,23 +24,19 @@ class FindView extends StatelessWidget {
                             .copyWith(fontSize: 80),
                       ),
                       const SizedBox(width: 24),
-                      Center(
-                        child: Center(
-                          child: Text(
-                            bloc.emoji.value.character,
-                            style: Theme.of(context)
-                                .primaryTextTheme
-                                .title
-                                .copyWith(fontSize: 100),
-                          ),
-                        ),
+                      Text(
+                        bloc.emoji.value.character,
+                        style: Theme.of(context)
+                            .primaryTextTheme
+                            .title
+                            .copyWith(fontSize: 80),
                       )
                     ],
                   ),
                   const SizedBox(height: 16),
                   Text(
                     'in under ${bloc.timelimit.value} seconds',
-                    style: Theme.of(context).textTheme.subhead,
+                    style: Theme.of(context).accentTextTheme.subhead,
                   )
                 ],
               ),
@@ -49,7 +45,7 @@ class FindView extends StatelessWidget {
               padding: const EdgeInsets.only(left: 24, right: 24, bottom: 72),
               child: Text(
                 'Find the emoji and point your camera at it before time expires.',
-                style: Theme.of(context).textTheme.subhead,
+                style: Theme.of(context).accentTextTheme.subhead,
                 textAlign: TextAlign.center,
               ),
             )
