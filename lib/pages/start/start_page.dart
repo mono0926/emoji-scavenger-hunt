@@ -27,6 +27,13 @@ class StartPageState extends State<StartPage> {
     _advanceStep();
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox.expand(
+      child: _buildContent(),
+    );
+  }
+
   void _advanceStep() async {
     const duration = Duration(milliseconds: 1000);
     await Future.delayed(duration);
@@ -43,13 +50,6 @@ class StartPageState extends State<StartPage> {
     });
     await Future.delayed(duration);
     widget.completed();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox.expand(
-      child: _buildContent(),
-    );
   }
 
   Widget _buildContent() {
