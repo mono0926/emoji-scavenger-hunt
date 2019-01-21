@@ -48,9 +48,7 @@ class StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     return SizedBox.expand(
-      child: Scaffold(
-        body: _buildContent(),
-      ),
+      child: _buildContent(),
     );
   }
 
