@@ -30,11 +30,13 @@ class RootPageState extends State<RootPage>
     return Stack(
       children: [
         CapturePage(),
-        PositionedTransition(
-          rect: RelativeRectTween(
-            begin: RelativeRect.fill,
-            end: RelativeRect.fromLTRB(0, -height, 0, height),
-          ).animate(_controller),
+        SlideTransition(
+          position: _controller
+              .drive(CurveTween(curve: Curves.easeInOut))
+              .drive(Tween<Offset>(
+                begin: Offset.zero,
+                end: const Offset(0, -1),
+              )),
           child: StartPage(
             completed: () async {
               // TODO: このあたり適当すぎるので直す
