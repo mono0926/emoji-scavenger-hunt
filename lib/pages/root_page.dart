@@ -12,35 +12,38 @@ class RootPage extends StatefulWidget {
 
 class RootPageState extends State<RootPage>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  AnimationController _Animationcontroller;
+  Animation<Offset> _positionAnimation;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
+    _Animationcontroller = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 400),
+    );
+    _positionAnimation = Tween<Offset>(
+      begin: Offset.zero,
+      end: const Offset(0, -1),
+    ).animate(
+      CurvedAnimation(
+        curve: Curves.easeInOut,
+        parent: _Animationcontroller,
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final query = MediaQuery.of(context);
-    final height = query.size.height;
     return Stack(
       children: [
         CapturePage(),
         SlideTransition(
-          position: _controller
-              .drive(CurveTween(curve: Curves.easeInOut))
-              .drive(Tween<Offset>(
-                begin: Offset.zero,
-                end: const Offset(0, -1),
-              )),
+          position: _positionAnimation,
           child: StartPage(
             completed: () async {
               // TODO: このあたり適当すぎるので直す
-              await _controller.forward();
+              await _Animationcontroller.forward();
               final bloc = GameBlocProvider.of(context);
               bloc.start.add(null);
             },
