@@ -32,7 +32,7 @@ class RootPageState extends State<RootPage>
         CapturePage(),
         PositionedTransition(
           rect: RelativeRectTween(
-            begin: const RelativeRect.fromLTRB(0, 0, 0, 0),
+            begin: RelativeRect.fill,
             end: RelativeRect.fromLTRB(0, -height, 0, height),
           ).animate(_controller),
           child: StartPage(
