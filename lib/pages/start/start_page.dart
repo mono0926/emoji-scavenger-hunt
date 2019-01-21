@@ -29,8 +29,13 @@ class StartPageState extends State<StartPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox.expand(
-      child: _buildContent(),
+    return Container(
+      color: Colors.white,
+      child: AnimatedSwitcher(
+          child: _buildContent(),
+          duration: const Duration(milliseconds: 300),
+          transitionBuilder: (child, animation) =>
+              FadeTransition(child: child, opacity: animation)),
     );
   }
 
@@ -57,16 +62,19 @@ class StartPageState extends State<StartPage> {
     switch (_step) {
       case StartPageStep.three:
         return const CountDownView(
+          key: ValueKey('3'),
           text: '3',
           color: Color(0xFFDE34D3),
         );
       case StartPageStep.two:
         return const CountDownView(
+          key: ValueKey('2'),
           text: '2',
           color: Color(0xFFECBA2E),
         );
       case StartPageStep.one:
         return const CountDownView(
+          key: ValueKey('1'),
           text: '1',
           color: Color(0xFF5BCF3B),
         );

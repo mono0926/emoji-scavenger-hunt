@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class CountDownView extends StatelessWidget {
   const CountDownView({
-    Key key,
-    this.text,
-    this.color,
+    @required Key key,
+    @required this.text,
+    @required this.color,
   }) : super(key: key);
 
   final String text;
