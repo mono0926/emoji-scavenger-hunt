@@ -14,9 +14,16 @@ class CameraView extends StatefulWidget {
   }
 }
 
+enum CameraPreparationState {
+  initializing,
+  notAvailable,
+  prepared,
+}
+
 class CameraViewState extends State<CameraView> {
   CameraController _controller;
   var _isCapturing = false;
+  var _state = CameraPreparationState.initializing;
 
   @override
   void initState() {
@@ -40,6 +47,12 @@ class CameraViewState extends State<CameraView> {
 
   void initializeCameraController() async {
     final cameras = await availableCameras();
+    if (cameras.isEmpty) {
+      setState(() {
+        _state = CameraPreparationState.notAvailable;
+      });
+      return;
+    }
     _controller = CameraController(
       cameras[0],
       ResolutionPreset.medium,
@@ -48,24 +61,34 @@ class CameraViewState extends State<CameraView> {
     await _controller.startImageStream((image) async {
       _detectIfCan(image);
     });
-    setState(() {});
+    setState(() {
+      _state = CameraPreparationState.prepared;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_controller == null || !_controller.value.isInitialized) {
-      return const AppProgressIndicator();
+    switch (_state) {
+      case CameraPreparationState.initializing:
+        return const AppProgressIndicator();
+      case CameraPreparationState.notAvailable:
+        return Center(
+          child: Text(
+            'Camera not available ☹',
+            style: Theme.of(context).textTheme.display1,
+          ),
+        );
+      case CameraPreparationState.prepared:
+        return Container(
+          child: OverflowBox(
+            maxWidth: double.infinity,
+            child: AspectRatio(
+              aspectRatio: _controller.value.aspectRatio,
+              child: CameraPreview(_controller),
+            ),
+          ),
+        );
     }
-
-    return Container(
-      child: OverflowBox(
-        maxWidth: double.infinity,
-        child: AspectRatio(
-          aspectRatio: _controller.value.aspectRatio,
-          child: CameraPreview(_controller),
-        ),
-      ),
-    );
   }
 
   @override
