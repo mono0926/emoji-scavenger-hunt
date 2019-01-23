@@ -15,6 +15,8 @@ dependencies:
   bloc_provider: any
   image: any
   path_provider: any
+  flutter_svg: any
+  url_launcher: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -24,3 +26,5 @@ flutter:
   - family: Changa One
     fonts:
     - asset: assets/fonts/ChangaOne-Regular.ttf
+  assets:
+    - assets/images/

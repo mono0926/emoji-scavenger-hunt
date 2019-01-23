@@ -89,6 +89,8 @@ class CameraViewState extends State<CameraView> {
           ),
         );
     }
+    assert(false);
+    return null;
   }
 
   @override

@@ -4,6 +4,10 @@ import 'package:emoji_scavenger_hunt/pages/start/start_page.dart';
 import 'package:flutter/material.dart';
 
 class RootPage extends StatefulWidget {
+  const RootPage();
+
+  static const routeName = '/root';
+
   @override
   RootPageState createState() {
     return new RootPageState();
@@ -12,13 +16,13 @@ class RootPage extends StatefulWidget {
 
 class RootPageState extends State<RootPage>
     with SingleTickerProviderStateMixin {
-  AnimationController _Animationcontroller;
+  AnimationController _animationController;
   Animation<Offset> _positionAnimation;
 
   @override
   void initState() {
     super.initState();
-    _Animationcontroller = AnimationController(
+    _animationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 400),
     );
@@ -28,7 +32,7 @@ class RootPageState extends State<RootPage>
     ).animate(
       CurvedAnimation(
         curve: Curves.easeInOut,
-        parent: _Animationcontroller,
+        parent: _animationController,
       ),
     );
   }
@@ -43,7 +47,7 @@ class RootPageState extends State<RootPage>
           child: StartPage(
             completed: () async {
               // TODO: このあたり適当すぎるので直す
-              await _Animationcontroller.forward();
+              await _animationController.forward();
               final bloc = GameBlocProvider.of(context);
               bloc.start.add(null);
             },
