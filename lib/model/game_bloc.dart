@@ -9,10 +9,8 @@ import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
 class GameBloc implements Bloc {
-  GameBloc({
-    @required this.gameService,
-    @required this.labelDetector,
-  })  : _emojiNameController =
+  GameBloc({@required this.gameService, @required this.labelDetector})
+      : _emojiNameController =
             BehaviorSubject<EmojiInfo>(seedValue: gameService.emoji),
         _timelimitController =
             BehaviorSubject<int>(seedValue: gameService.timelimit) {
