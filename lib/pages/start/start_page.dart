@@ -32,10 +32,11 @@ class StartPageState extends State<StartPage> {
     return Container(
       color: Colors.white,
       child: AnimatedSwitcher(
-          child: _buildContent(),
-          duration: const Duration(milliseconds: 300),
-          transitionBuilder: (child, animation) =>
-              FadeTransition(child: child, opacity: animation)),
+        child: _buildContent(),
+        duration: const Duration(milliseconds: 300),
+        transitionBuilder: (child, animation) =>
+            FadeTransition(child: child, opacity: animation),
+      ),
     );
   }
 
