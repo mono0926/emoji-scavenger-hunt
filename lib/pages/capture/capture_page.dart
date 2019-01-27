@@ -9,6 +9,7 @@ class CapturePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        automaticallyImplyLeading: false,
         title: Text(
           'FIND ${bloc.emoji.value.character}',
           style: Theme.of(context).primaryTextTheme.title,
