@@ -57,6 +57,7 @@ class GameBloc implements Bloc {
   final GameService gameService;
   final LabelDetector labelDetector;
   final SoundService soundService;
+  // TODO: Call when game ended
   SoundServiceResult _soundLoop;
 
   final BehaviorSubject<EmojiInfo> _emojiNameController;
