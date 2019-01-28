@@ -35,7 +35,7 @@ class FindView extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'in under ${bloc.timelimit.value} seconds',
+                    'in under ${bloc.timeLimit.value} seconds',
                     style: Theme.of(context).accentTextTheme.subhead,
                   )
                 ],

@@ -35,6 +35,8 @@ class RootPageState extends State<RootPage>
         parent: _animationController,
       ),
     );
+    final bloc = GameBlocProvider.of(context);
+    bloc.countdown.add(null);
   }
 
   @override

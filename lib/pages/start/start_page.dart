@@ -1,5 +1,3 @@
-import 'package:emoji_scavenger_hunt/model/service_provider.dart';
-import 'package:emoji_scavenger_hunt/model/sound_service.dart';
 import 'package:emoji_scavenger_hunt/pages/start/count_down_view.dart';
 import 'package:emoji_scavenger_hunt/pages/start/find_view.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +41,6 @@ class StartPageState extends State<StartPage> {
   }
 
   void _advanceStep() async {
-    ServiceProvider.of(context).soundService.play(SoundType.countdown);
     const duration = Duration(milliseconds: 1000);
     await Future.delayed(duration);
     setState(() {

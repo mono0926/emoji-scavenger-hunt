@@ -25,8 +25,8 @@ class CapturePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8),
             child: StreamBuilder<int>(
-              initialData: bloc.timelimit.value,
-              stream: bloc.timelimit,
+              initialData: bloc.timeLimit.value,
+              stream: bloc.timeLimit,
               builder: (context, snap) {
                 return Text(
                   '⏱ ${snap.data}',

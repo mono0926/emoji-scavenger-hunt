@@ -4,27 +4,36 @@ import 'package:bloc_provider/bloc_provider.dart';
 import 'package:camera/camera.dart';
 import 'package:emoji_scavenger_hunt/model/game_service.dart';
 import 'package:emoji_scavenger_hunt/model/label_detector.dart';
+import 'package:emoji_scavenger_hunt/model/sound_service.dart';
 import 'package:emoji_scavenger_hunt/util/util.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
 class GameBloc implements Bloc {
-  GameBloc({@required this.gameService, @required this.labelDetector})
-      : _emojiNameController =
+  GameBloc({
+    @required this.gameService,
+    @required this.labelDetector,
+    @required this.soundService,
+  })  : _emojiNameController =
             BehaviorSubject<EmojiInfo>(seedValue: gameService.emoji),
-        _timelimitController =
+        _timeLimitController =
             BehaviorSubject<int>(seedValue: gameService.timelimit) {
     _advanceController.listen((_) {
       _timer.cancel();
       gameService.advance();
       _emojiNameController.add(gameService.emoji);
-      _timelimitController.add(gameService.timelimit);
+      _timeLimitController.add(gameService.timelimit);
     });
 
-    _startController.listen((_) {
+    _countdownController.listen((_) {
+      soundService.play(SoundType.countdown);
+    });
+
+    _startController.listen((_) async {
       _timer = Timer.periodic(Duration(seconds: 1), (_) {
-        _timelimitController.add(timelimit.value - 1);
+        _timeLimitController.add(timeLimit.value - 1);
       });
+      _soundLoop = await soundService.loop(SoundType.gameLoop);
     });
 
     _detectionController.listen((image) async {
@@ -47,23 +56,28 @@ class GameBloc implements Bloc {
 
   final GameService gameService;
   final LabelDetector labelDetector;
+  final SoundService soundService;
+  SoundServiceResult _soundLoop;
 
   final BehaviorSubject<EmojiInfo> _emojiNameController;
-  final BehaviorSubject<int> _timelimitController;
+  final BehaviorSubject<int> _timeLimitController;
   final _detectionController = PublishSubject<CameraImage>();
   final _advanceController = PublishSubject<void>();
   final _startController = PublishSubject<void>();
+  final _countdownController = PublishSubject<void>();
   final _correctController = PublishSubject<void>();
   Timer _timer;
   var _isDetecting = false;
 
   ValueObservable<EmojiInfo> get emoji => _emojiNameController;
-  ValueObservable<int> get timelimit => _timelimitController;
+  ValueObservable<int> get timeLimit => _timeLimitController;
   Observable<void> get correct => _correctController;
+  Sink<void> get countdown => _countdownController.sink;
   Sink<void> get advance => _advanceController.sink;
   Sink<void> get start => _startController.sink;
   Sink<CameraImage> get detected => _detectionController.sink;
 
+  // TODO: Add
   @override
   void dispose() {}
 }

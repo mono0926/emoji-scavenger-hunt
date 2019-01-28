@@ -10,8 +10,10 @@ class GameBlocProvider extends BlocProvider<GameBloc> {
             creator: (context, _bag) {
               final serviceProvider = ServiceProvider.of(context);
               return GameBloc(
-                  gameService: serviceProvider.gameService,
-                  labelDetector: serviceProvider.labelDetector);
+                gameService: serviceProvider.gameService,
+                labelDetector: serviceProvider.labelDetector,
+                soundService: serviceProvider.soundService,
+              );
             });
 
   static GameBloc of(BuildContext context) => BlocProvider.of(context);
