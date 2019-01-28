@@ -18,13 +18,6 @@ class GameBloc implements Bloc {
             BehaviorSubject<EmojiInfo>(seedValue: gameService.emoji),
         _timeLimitController =
             BehaviorSubject<int>(seedValue: gameService.timelimit) {
-    _advanceController.listen((_) {
-      _timer.cancel();
-      gameService.advance();
-      _emojiNameController.add(gameService.emoji);
-      _timeLimitController.add(gameService.timelimit);
-    });
-
     _countdownController.listen((_) {
       soundService.play(SoundType.countdown);
     });
@@ -51,6 +44,13 @@ class GameBloc implements Bloc {
           .contains(emoji.value.name)) {
         _correctController.add(null);
       }
+    });
+
+    _advanceController.listen((_) {
+      _timer.cancel();
+      gameService.advance();
+      _emojiNameController.add(gameService.emoji);
+      _timeLimitController.add(gameService.timelimit);
     });
   }
 
