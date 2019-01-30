@@ -44,7 +44,11 @@ class CapturePage extends StatelessWidget {
             right: 0,
             top: 0,
             child: FlatButton(
-              onPressed: () {},
+              onPressed: () {
+                // TODO: 途中
+                bloc.exit.add(null);
+                Navigator.of(context).pop();
+              },
               child: Text(
                 'QUIT',
                 style: Theme.of(context).primaryTextTheme.headline,

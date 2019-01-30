@@ -56,10 +56,10 @@ class App extends StatelessWidget {
     logger.warning('name: ${settings.name}');
     switch (settings.name) {
       case RootPage.routeName:
+        // TODO: 単なるフェードイン/アウトにしたい
         return MaterialPageRoute(
             fullscreenDialog: true,
             builder: (context) {
-              logger.warning('InputTaskPage returned');
               return const RootPage();
             });
     }

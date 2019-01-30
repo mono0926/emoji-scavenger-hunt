@@ -52,6 +52,10 @@ class GameBloc implements Bloc {
       _emojiNameController.add(gameService.emoji);
       _timeLimitController.add(gameService.timelimit);
     });
+
+    _exitController.listen((_) {
+      _soundLoop?.stop();
+    });
   }
 
   final GameService gameService;
@@ -65,6 +69,7 @@ class GameBloc implements Bloc {
   final _detectionController = PublishSubject<CameraImage>();
   final _advanceController = PublishSubject<void>();
   final _startController = PublishSubject<void>();
+  final _exitController = PublishSubject<void>();
   final _countdownController = PublishSubject<void>();
   final _correctController = PublishSubject<void>();
   Timer _timer;
@@ -76,6 +81,7 @@ class GameBloc implements Bloc {
   Sink<void> get countdown => _countdownController.sink;
   Sink<void> get advance => _advanceController.sink;
   Sink<void> get start => _startController.sink;
+  Sink<void> get exit => _exitController.sink;
   Sink<CameraImage> get detected => _detectionController.sink;
 
   // TODO: Add
