@@ -42,7 +42,7 @@ class GameBloc implements Bloc {
           .sublist(0, labels.length)
           .map((s) => s.label.toLowerCase())
           .contains(emoji.value.name)) {
-        _correctController.add(null);
+        _correctController.add(image);
       }
     });
 
@@ -71,13 +71,13 @@ class GameBloc implements Bloc {
   final _startController = PublishSubject<void>();
   final _exitController = PublishSubject<void>();
   final _countdownController = PublishSubject<void>();
-  final _correctController = PublishSubject<void>();
+  final _correctController = PublishSubject<CameraImage>();
   Timer _timer;
   var _isDetecting = false;
 
   ValueObservable<EmojiInfo> get emoji => _emojiNameController;
   ValueObservable<int> get timeLimit => _timeLimitController;
-  Observable<void> get correct => _correctController;
+  Observable<CameraImage> get correct => _correctController;
   Sink<void> get countdown => _countdownController.sink;
   Sink<void> get advance => _advanceController.sink;
   Sink<void> get start => _startController.sink;
