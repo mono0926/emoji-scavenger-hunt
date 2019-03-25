@@ -15,9 +15,9 @@ class GameBloc implements Bloc {
     @required this.labelDetector,
     @required this.soundService,
   })  : _emojiNameController =
-            BehaviorSubject<EmojiInfo>(seedValue: gameService.emoji),
+            BehaviorSubject<EmojiInfo>.seeded(gameService.emoji),
         _timeLimitController =
-            BehaviorSubject<int>(seedValue: gameService.timelimit) {
+            BehaviorSubject<int>.seeded(gameService.timelimit) {
     _countdownController.listen((_) {
       soundService.play(SoundType.countdown);
     });
