@@ -24,7 +24,7 @@ class RootPageState extends State<RootPage>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 400),
+      duration: const Duration(milliseconds: 400),
     );
     _positionAnimation = Tween<Offset>(
       begin: Offset.zero,
