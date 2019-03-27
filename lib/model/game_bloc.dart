@@ -21,41 +21,10 @@ class GameBloc implements Bloc {
     _countdownController.listen((_) {
       soundService.play(SoundType.countdown);
     });
-
-    _startController.listen((_) async {
-      _timer = Timer.periodic(Duration(seconds: 1), (_) {
-        _timeLimitController.add(timeLimit.value - 1);
-      });
-      _soundLoop = await soundService.loop(SoundType.gameLoop);
-    });
-
-    _detectionController.listen((image) async {
-      if (_isDetecting) {
-        return;
-      }
-      _isDetecting = true;
-      final labels = await labelDetector.detectImage(image);
-      logger
-          .fine(labels.map((r) => '${r.label} (confidence: ${r.confidence})'));
-      _isDetecting = false;
-      if (labels
-          .sublist(0, labels.length)
-          .map((s) => s.label.toLowerCase())
-          .contains(emoji.value.name)) {
-        _correctController.add(image);
-      }
-    });
-
-    _advanceController.listen((_) {
-      _timer.cancel();
-      gameService.advance();
-      _emojiNameController.add(gameService.emoji);
-      _timeLimitController.add(gameService.timelimit);
-    });
-
-    _exitController.listen((_) {
-      _soundLoop?.stop();
-    });
+    _startController.listen((_) => _startGame());
+    _detectionController.listen(_detect);
+    _advanceController.listen((_) => _advance());
+    _exitController.listen((_) => _exit());
   }
 
   final GameService gameService;
@@ -79,12 +48,62 @@ class GameBloc implements Bloc {
   ValueObservable<int> get timeLimit => _timeLimitController;
   Observable<CameraImage> get correct => _correctController;
   Sink<void> get countdown => _countdownController.sink;
+  // TODO: call
   Sink<void> get advance => _advanceController.sink;
   Sink<void> get start => _startController.sink;
   Sink<void> get exit => _exitController.sink;
   Sink<CameraImage> get detected => _detectionController.sink;
 
+  void _startGame() async {
+    _timer = Timer.periodic(
+      Duration(seconds: 1),
+      (_) => _timeLimitController.add(timeLimit.value - 1),
+    );
+    _soundLoop = await soundService.loop(SoundType.gameLoop);
+  }
+
+  void _detect(CameraImage image) async {
+    if (_isDetecting) {
+      return;
+    }
+    _isDetecting = true;
+    final labels = await labelDetector.detectImage(image);
+    logger.fine(labels.map((r) => '${r.label} (confidence: ${r.confidence})'));
+    _isDetecting = false;
+    if (labels
+        .sublist(0, labels.length)
+        .map((s) => s.label.toLowerCase())
+        .contains(emoji.value.name)) {
+      _correctController.add(image);
+    }
+  }
+
+  void _advance() {
+    _reset();
+    gameService.advance();
+  }
+
+  void _exit() {
+    _reset();
+    _soundLoop?.stop();
+  }
+
+  void _reset() {
+    _timer.cancel();
+    _emojiNameController.add(gameService.emoji);
+    _timeLimitController.add(gameService.timelimit);
+  }
+
   // TODO: Add
   @override
-  void dispose() {}
+  void dispose() {
+    _emojiNameController.close();
+    _timeLimitController.close();
+    _detectionController.close();
+    _advanceController.close();
+    _startController.close();
+    _exitController.close();
+    _countdownController.close();
+    _correctController.close();
+  }
 }
